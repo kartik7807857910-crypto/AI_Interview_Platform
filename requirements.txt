@@ -1,5 +1,5 @@
 Flask
 python-dotenv
-Werkzeug
 openai
+Werkzeug
 gunicorn
