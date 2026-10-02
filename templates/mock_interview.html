@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Mock Interview | AI Interview</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+
+        body {
+
+            min-height: 100vh;
+
+            background:
+                radial-gradient(circle at top left,
+                    #263b73 0%,
+                    transparent 35%),
+                radial-gradient(circle at bottom right,
+                    #44205f 0%,
+                    transparent 35%),
+                linear-gradient(135deg,
+                    #080b18,
+                    #10162d 50%,
+                    #090c18);
+
+            color: white;
+
+            padding: 30px 20px;
+        }
+
+
+        /* MAIN CONTAINER */
+
+        .container {
+
+            width: 100%;
+            max-width: 1000px;
+
+            margin: auto;
+        }
+
+
+        /* TOP BAR */
+
+        .topbar {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 30px;
+        }
+
+
+        .brand {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            font-size: 21px;
+
+            font-weight: 800;
+        }
+
+
+        .brand-icon {
+
+            width: 40px;
+            height: 40px;
+
+            border-radius: 12px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background:
+                linear-gradient(135deg,
+                    #667eea,
+                    #764ba2);
+
+            box-shadow:
+                0 8px 25px rgba(102, 126, 234, 0.30);
+        }
+
+
+        .exit-btn {
+
+            text-decoration: none;
+
+            color: #aab2c8;
+
+            border:
+                1px solid rgba(255, 255, 255, 0.10);
+
+            padding: 9px 15px;
+
+            border-radius: 10px;
+
+            font-size: 13px;
+
+            transition: 0.25s;
+        }
+
+
+        .exit-btn:hover {
+
+            color: white;
+
+            background:
+                rgba(255, 255, 255, 0.06);
+        }
+
+
+        /* HEADER */
+
+        .header {
+
+            text-align: center;
+
+            margin-bottom: 30px;
+        }
+
+
+        .header h1 {
+
+            font-size: 38px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .gradient-text {
+
+            background:
+                linear-gradient(90deg,
+                    #8ea2ff,
+                    #c084fc);
+
+            -webkit-background-clip: text;
+
+            -webkit-text-fill-color: transparent;
+        }
+
+
+        .header p {
+
+            color: #9da6bd;
+
+            font-size: 15px;
+        }
+
+
+        /* PROGRESS */
+
+        .progress-card {
+
+            background:
+                rgba(255, 255, 255, 0.06);
+
+            border:
+                1px solid rgba(255, 255, 255, 0.10);
+
+            border-radius: 18px;
+
+            padding: 20px 24px;
+
+            backdrop-filter: blur(15px);
+
+            margin-bottom: 25px;
+        }
+
+
+        .progress-info {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 12px;
+
+            font-size: 14px;
+        }
+
+
+        .progress-label {
+
+            color: #cbd2e5;
+
+            font-weight: 600;
+        }
+
+
+        .progress-number {
+
+            color: #9eafff;
+
+            font-weight: 700;
+        }
+
+
+        .progress-bar {
+
+            width: 100%;
+
+            height: 8px;
+
+            background:
+                rgba(255, 255, 255, 0.08);
+
+            border-radius: 20px;
+
+            overflow: hidden;
+        }
+
+
+        .progress-fill {
+
+            height: 100%;
+
+            width: calc(({
+                        {
+                        question_number
+                    }
+                }
+
+                / {
+                        {
+                        total_questions
+                    }
+                }) * 100%);
+
+        background: linear-gradient(90deg,
+            #667eea,
+            #c084fc);
+
+        border-radius: 20px;
+
+        transition: width 0.4s ease;
+        }
+
+
+        /* INTERVIEW CARD */
+
+        .interview-card {
+
+            background:
+                rgba(255, 255, 255, 0.07);
+
+            border:
+                1px solid rgba(255, 255, 255, 0.12);
+
+            border-radius: 24px;
+
+            padding: 35px;
+
+            backdrop-filter: blur(20px);
+
+            box-shadow:
+                0 25px 70px rgba(0, 0, 0, 0.30);
+        }
+
+
+        /* QUESTION HEADER */
+
+        .question-header {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 25px;
+        }
+
+
+        .question-badge {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            padding: 8px 13px;
+
+            border-radius: 20px;
+
+            background:
+                rgba(102, 126, 234, 0.14);
+
+            border:
+                1px solid rgba(102, 126, 234, 0.25);
+
+            color: #aebaff;
+
+            font-size: 13px;
+
+            font-weight: 700;
+        }
+
+
+        .ai-badge {
+
+            color: #cbd5e1;
+
+            font-size: 13px;
+        }
+
+
+        /* QUESTION */
+
+        .question-box {
+
+            padding: 28px;
+
+            border-radius: 18px;
+
+            background:
+                rgba(0, 0, 0, 0.18);
+
+            border:
+                1px solid rgba(255, 255, 255, 0.07);
+
+            margin-bottom: 25px;
+        }
+
+
+        .question-box h2 {
+
+            font-size: 26px;
+
+            line-height: 1.5;
+
+            font-weight: 600;
+
+            color: #f5f7ff;
+        }
+
+
+        /* ANSWER */
+
+        .answer-label {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 10px;
+        }
+
+
+        .answer-label span:first-child {
+
+            color: #dce1ef;
+
+            font-size: 14px;
+
+            font-weight: 700;
+        }
+
+
+        .counter {
+
+            color: #737d97;
+
+            font-size: 12px;
+        }
+
+
+        textarea {
+
+            width: 100%;
+
+            min-height: 190px;
+
+            resize: vertical;
+
+            padding: 17px;
+
+            border-radius: 14px;
+
+            border:
+                1px solid rgba(255, 255, 255, 0.11);
+
+            background:
+                rgba(0, 0, 0, 0.18);
+
+            color: white;
+
+            outline: none;
+
+            font-size: 15px;
+
+            line-height: 1.6;
+
+            transition: 0.25s;
+        }
+
+
+        textarea::placeholder {
+
+            color: #68718a;
+        }
+
+
+        textarea:focus {
+
+            border-color: #7184ff;
+
+            background:
+                rgba(0, 0, 0, 0.25);
+
+            box-shadow:
+                0 0 0 3px rgba(113, 132, 255, 0.10);
+        }
+
+
+        /* BUTTON AREA */
+
+        .button-area {
+
+            display: flex;
+
+            justify-content: flex-end;
+
+            margin-top: 22px;
+        }
+
+
+        .next-btn {
+
+            border: none;
+
+            padding: 14px 25px;
+
+            border-radius: 12px;
+
+            background:
+                linear-gradient(135deg,
+                    #667eea,
+                    #764ba2);
+
+            color: white;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: 0.25s;
+
+            box-shadow:
+                0 10px 30px rgba(102, 126, 234, 0.25);
+        }
+
+
+        .next-btn:hover {
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 15px 35px rgba(102, 126, 234, 0.38);
+        }
+
+
+        /* INFO */
+
+        .info-row {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 15px;
+
+            margin-top: 20px;
+        }
+
+
+        .info-card {
+
+            padding: 17px;
+
+            border-radius: 14px;
+
+            background:
+                rgba(255, 255, 255, 0.045);
+
+            border:
+                1px solid rgba(255, 255, 255, 0.07);
+
+            text-align: center;
+        }
+
+
+        .info-card .icon {
+
+            font-size: 20px;
+
+            margin-bottom: 7px;
+        }
+
+
+        .info-card .label {
+
+            color: #7e879f;
+
+            font-size: 11px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.5px;
+
+            margin-bottom: 4px;
+        }
+
+
+        .info-card .value {
+
+            color: #dce2f2;
+
+            font-size: 14px;
+
+            font-weight: 600;
+        }
+
+
+        /* MOBILE */
+
+        @media (max-width: 700px) {
+
+            body {
+                padding: 20px 14px;
+            }
+
+            .header h1 {
+                font-size: 29px;
+            }
+
+            .interview-card {
+                padding: 22px;
+            }
+
+            .question-box {
+                padding: 20px;
+            }
+
+            .question-box h2 {
+                font-size: 21px;
+            }
+
+            .info-row {
+                grid-template-columns: 1fr;
+            }
+
+            .topbar {
+                margin-bottom: 22px;
+            }
+        }
+
+
+        @media (max-width: 450px) {
+
+            .brand {
+                font-size: 18px;
+            }
+
+            .brand-icon {
+                width: 35px;
+                height: 35px;
+            }
+
+            .exit-btn {
+                padding: 8px 11px;
+            }
+
+            .interview-card {
+                padding: 17px;
+            }
+
+            .question-header {
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .question-box h2 {
+                font-size: 19px;
+            }
+
+            textarea {
+                min-height: 170px;
+            }
+
+            .button-area {
+                justify-content: stretch;
+            }
+
+            .next-btn {
+                width: 100%;
+            }
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="container">
+
+
+        <!-- TOP BAR -->
+
+        <div class="topbar">
+
+            <div class="brand">
+
+                <div class="brand-icon">
+                    🤖
+                </div>
+
+                AI Interview
+
+            </div>
+
+
+            <a href="{{ url_for('dashboard') }}" class="exit-btn">
+                ✕ Exit Interview
+            </a>
+
+        </div>
+
+
+        <!-- HEADER -->
+
+        <div class="header">
+
+            <h1>
+
+                <span class="gradient-text">
+                    AI Mock Interview
+                </span>
+
+            </h1>
+
+            <p>
+                Think carefully and answer as you would in a real interview.
+            </p>
+
+        </div>
+
+
+        <!-- PROGRESS -->
+
+        <div class="progress-card">
+
+            <div class="progress-info">
+
+                <span class="progress-label">
+                    Interview Progress
+                </span>
+
+                <span class="progress-number">
+                    Question {{ question_number }}
+                    of {{ total_questions }}
+                </span>
+
+            </div>
+
+
+            <div class="progress-bar">
+
+                <div class="progress-fill"></div>
+
+            </div>
+
+        </div>
+
+
+        <!-- INTERVIEW -->
+
+        <div class="interview-card">
+
+
+            <div class="question-header">
+
+                <div class="question-badge">
+
+                    🎯
+
+                    Question {{ question_number }}
+
+                </div>
+
+
+                <div class="ai-badge">
+
+                    ✨ AI Generated
+
+                </div>
+
+            </div>
+
+
+            <!-- QUESTION -->
+
+            <div class="question-box">
+
+                <h2>
+                    {{ question }}
+                </h2>
+
+            </div>
+
+
+            <!-- ANSWER -->
+
+            <form method="POST" action="{{ url_for('mock_interview') }}" onsubmit="return submitAnswer()">
+
+
+                <div class="answer-label">
+
+                    <span>
+                        Your Answer
+                    </span>
+
+                    <span class="counter" id="counter">
+                        0 characters
+                    </span>
+
+                </div>
+
+
+                <textarea id="answer" name="answer" placeholder="Type your answer here..." required maxlength="3000"
+                    oninput="updateCounter()"></textarea>
+
+
+                <div class="button-area">
+
+                    <button type="submit" class="next-btn" id="nextButton">
+
+                        {% if question_number == total_questions %}
+
+                        Finish Interview ✓
+
+                        {% else %}
+
+                        Submit & Next →
+
+                        {% endif %}
+
+                    </button>
+
+                </div>
+
+            </form>
+
+
+        </div>
+
+
+        <!-- INFO CARDS -->
+
+        <div class="info-row">
+
+
+            <div class="info-card">
+
+                <div class="icon">
+                    🧠
+                </div>
+
+                <div class="label">
+                    Think
+                </div>
+
+                <div class="value">
+                    Take your time
+                </div>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <div class="icon">
+                    💬
+                </div>
+
+                <div class="label">
+                    Answer
+                </div>
+
+                <div class="value">
+                    Be clear & specific
+                </div>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <div class="icon">
+                    📊
+                </div>
+
+                <div class="label">
+                    Result
+                </div>
+
+                <div class="value">
+                    Get AI feedback
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+    <script>
+
+        function updateCounter() {
+
+            const answer =
+                document.getElementById("answer");
+
+            const counter =
+                document.getElementById("counter");
+
+            const length =
+                answer.value.length;
+
+            counter.textContent =
+                length + " characters";
+        }
+
+
+        function submitAnswer() {
+
+            const answer =
+                document.getElementById("answer").value.trim();
+
+            if (answer.length === 0) {
+
+                alert("Please enter your answer before continuing.");
+
+                return false;
+            }
+
+
+            const button =
+                document.getElementById("nextButton");
+
+
+            button.disabled = true;
+
+            button.textContent =
+                "Processing...";
+
+
+            return true;
+        }
+
+    </script>
+
+
+</body>
+
+</html>

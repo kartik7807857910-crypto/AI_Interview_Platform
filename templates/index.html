@@ -1,0 +1,666 @@
+python<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Interview | Smart Interview Preparation</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            color: white;
+            background:
+                radial-gradient(circle at 10% 10%, #312e81, transparent 35%),
+                radial-gradient(circle at 90% 80%, #0369a1, transparent 30%),
+                #020617;
+        }
+
+        /* NAVBAR */
+
+        nav {
+            height: 75px;
+            padding: 0 7%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            background: rgba(2, 6, 23, 0.75);
+            backdrop-filter: blur(15px);
+
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #818cf8;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .nav-btn {
+            text-decoration: none;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 9px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: 0.3s;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .register-btn {
+            background: #6366f1;
+            border-color: #6366f1;
+        }
+
+        .register-btn:hover {
+            background: #4f46e5;
+        }
+
+        /* HERO */
+
+        .hero {
+            min-height: calc(100vh - 75px);
+
+            width: 90%;
+            max-width: 1200px;
+
+            margin: auto;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 60px;
+        }
+
+        .hero-text {
+            width: 55%;
+        }
+
+        .badge {
+            display: inline-block;
+
+            padding: 8px 14px;
+
+            margin-bottom: 20px;
+
+            border-radius: 30px;
+
+            background: rgba(99, 102, 241, 0.15);
+
+            border: 1px solid rgba(129, 140, 248, 0.3);
+
+            color: #a5b4fc;
+
+            font-size: 14px;
+        }
+
+        .hero h1 {
+            font-size: 60px;
+            line-height: 1.1;
+            margin-bottom: 22px;
+        }
+
+        .hero h1 span {
+            color: #818cf8;
+        }
+
+        .hero p {
+            color: #94a3b8;
+            font-size: 18px;
+            line-height: 1.7;
+            max-width: 650px;
+            margin-bottom: 30px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .primary-btn,
+        .secondary-btn {
+            text-decoration: none;
+
+            padding: 15px 24px;
+
+            border-radius: 11px;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+        .primary-btn {
+            background: #6366f1;
+            color: white;
+        }
+
+        .primary-btn:hover {
+            background: #4f46e5;
+            transform: translateY(-2px);
+        }
+
+        .secondary-btn {
+            color: white;
+
+            border: 1px solid rgba(255, 255, 255, 0.2);
+
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .secondary-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        /* HERO CARD */
+
+        .hero-card {
+            width: 390px;
+
+            padding: 30px;
+
+            border-radius: 25px;
+
+            background: rgba(255, 255, 255, 0.07);
+
+            border: 1px solid rgba(255, 255, 255, 0.13);
+
+            backdrop-filter: blur(20px);
+
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.35);
+        }
+
+        .robot {
+            text-align: center;
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+
+        .hero-card h2 {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .hero-card p {
+            text-align: center;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            padding: 14px;
+
+            margin-bottom: 10px;
+
+            border-radius: 12px;
+
+            background: rgba(0, 0, 0, 0.18);
+        }
+
+        .feature-icon {
+            font-size: 23px;
+        }
+
+        .feature-text {
+            font-size: 14px;
+            color: #cbd5e1;
+        }
+
+        /* FEATURES */
+
+        .features-section {
+            width: 90%;
+            max-width: 1200px;
+
+            margin: 40px auto 80px;
+        }
+
+        .section-heading {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .section-heading h2 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .section-heading p {
+            color: #94a3b8;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .feature-card {
+            padding: 25px;
+
+            border-radius: 18px;
+
+            background: rgba(255, 255, 255, 0.06);
+
+            border: 1px solid rgba(255, 255, 255, 0.1);
+
+            transition: 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+
+            border-color: rgba(129, 140, 248, 0.5);
+        }
+
+        .feature-card-icon {
+            font-size: 35px;
+            margin-bottom: 15px;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            color: #94a3b8;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        /* FOOTER */
+
+        footer {
+            text-align: center;
+
+            padding: 25px;
+
+            color: #64748b;
+
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        /* MOBILE */
+
+        @media(max-width: 850px) {
+
+            .hero {
+                flex-direction: column;
+                text-align: center;
+
+                padding: 70px 0;
+            }
+
+            .hero-text {
+                width: 100%;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-card {
+                width: 100%;
+                max-width: 400px;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 42px;
+            }
+
+        }
+
+        @media(max-width: 500px) {
+
+            nav {
+                padding: 0 20px;
+            }
+
+            .logo {
+                font-size: 19px;
+            }
+
+            .nav-btn {
+                padding: 8px 12px;
+                font-size: 13px;
+            }
+
+            .hero {
+                width: 92%;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .hero-card {
+                padding: 22px;
+            }
+
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- NAVBAR -->
+
+    <nav>
+
+        <div class="logo">
+            🤖 AI <span>Interview</span>
+        </div>
+
+        <div class="nav-buttons">
+
+            <a href="{{ url_for('login') }}" class="nav-btn">
+                Login
+            </a>
+
+            <a href="{{ url_for('register') }}" class="nav-btn register-btn">
+                Register
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+
+        <div class="hero-text">
+
+            <div class="badge">
+                ✨ AI-Powered Interview Preparation
+            </div>
+
+            <h1>
+                Practice Interviews.
+                <span>Build Confidence.</span>
+            </h1>
+
+            <p>
+                Prepare for your next interview with an AI-powered
+                interview platform. Practice realistic questions,
+                receive intelligent feedback, track your scores,
+                and improve your performance.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="{{ url_for('register') }}" class="primary-btn">
+                    🚀 Get Started
+                </a>
+
+                <a href="{{ url_for('login') }}" class="secondary-btn">
+                    Login →
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- AI CARD -->
+
+        <div class="hero-card">
+
+            <div class="robot">
+                🤖
+            </div>
+
+            <h2>
+                Your AI Interview Coach
+            </h2>
+
+            <p>
+                Practice smarter and understand where you can improve.
+            </p>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    🎯
+                </div>
+
+                <div class="feature-text">
+                    Personalized interview questions
+                </div>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    📊
+                </div>
+
+                <div class="feature-text">
+                    Performance scoring and feedback
+                </div>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    👔
+                </div>
+
+                <div class="feature-text">
+                    HR interview practice
+                </div>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    📄
+                </div>
+
+                <div class="feature-text">
+                    Resume analysis
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FEATURES -->
+
+    <section class="features-section">
+
+        <div class="section-heading">
+
+            <h2>
+                Everything You Need
+            </h2>
+
+            <p>
+                One platform for complete interview preparation.
+            </p>
+
+        </div>
+
+
+        <div class="features">
+
+
+            <div class="feature-card">
+
+                <div class="feature-card-icon">
+                    🤖
+                </div>
+
+                <h3>
+                    AI Mock Interviews
+                </h3>
+
+                <p>
+                    Practice realistic interviews based on your
+                    selected job role, experience level and difficulty.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-card-icon">
+                    📈
+                </div>
+
+                <h3>
+                    Performance Analytics
+                </h3>
+
+                <p>
+                    Track your interview scores and understand
+                    your progress over time.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-card-icon">
+                    📚
+                </div>
+
+                <h3>
+                    Interview History
+                </h3>
+
+                <p>
+                    Keep a record of your previous interviews,
+                    scores and AI feedback.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-card-icon">
+                    👔
+                </div>
+
+                <h3>
+                    HR Practice
+                </h3>
+
+                <p>
+                    Prepare for common HR questions and improve
+                    your interview communication.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-card-icon">
+                    📄
+                </div>
+
+                <h3>
+                    Resume Analysis
+                </h3>
+
+                <p>
+                    Analyze your resume and identify areas that
+                    can be improved.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-card-icon">
+                    📱
+                </div>
+
+                <h3>
+                    Mobile Friendly
+                </h3>
+
+                <p>
+                    Use the interview platform comfortably on
+                    desktop, tablet or mobile.
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        AI Interview System • Practice. Improve. Succeed. 🚀
+
+    </footer>
+
+
+</body>
+
+</html>

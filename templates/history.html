@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Interview History | AI Interview</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+
+            min-height: 100vh;
+
+            background:
+                linear-gradient(135deg,
+                    #0f172a,
+                    #1e293b,
+                    #312e81);
+
+            color: white;
+
+            padding: 35px 20px;
+        }
+
+        .container {
+
+            max-width: 1100px;
+
+            margin: auto;
+        }
+
+        .header {
+
+            text-align: center;
+
+            margin-bottom: 35px;
+        }
+
+        .header h1 {
+
+            font-size: 36px;
+
+            margin-bottom: 10px;
+        }
+
+        .header p {
+
+            color: #cbd5e1;
+
+            font-size: 16px;
+        }
+
+        .history-card {
+
+            background: rgba(255, 255, 255, 0.08);
+
+            border: 1px solid rgba(255, 255, 255, 0.15);
+
+            border-radius: 20px;
+
+            padding: 25px;
+
+            backdrop-filter: blur(15px);
+        }
+
+        .interview {
+
+            background: rgba(0, 0, 0, 0.20);
+
+            border-radius: 15px;
+
+            padding: 20px;
+
+            margin-bottom: 18px;
+        }
+
+        .interview h2 {
+
+            font-size: 21px;
+
+            margin-bottom: 12px;
+        }
+
+        .info {
+
+            color: #cbd5e1;
+
+            line-height: 1.8;
+        }
+
+        .score {
+
+            font-size: 20px;
+
+            font-weight: bold;
+
+            margin-top: 10px;
+        }
+
+        .feedback {
+
+            margin-top: 15px;
+
+            padding: 15px;
+
+            background: rgba(255, 255, 255, 0.05);
+
+            border-radius: 10px;
+
+            color: #e2e8f0;
+
+            white-space: pre-wrap;
+
+            line-height: 1.6;
+        }
+
+        .empty {
+
+            text-align: center;
+
+            padding: 50px 20px;
+
+            color: #cbd5e1;
+
+            font-size: 18px;
+        }
+
+        .buttons {
+
+            display: flex;
+
+            justify-content: center;
+
+            margin-top: 30px;
+        }
+
+        .btn {
+
+            text-decoration: none;
+
+            padding: 13px 22px;
+
+            border-radius: 10px;
+
+            background: #6366f1;
+
+            color: white;
+
+            font-weight: bold;
+        }
+
+        .btn:hover {
+
+            background: #4f46e5;
+        }
+
+        @media(max-width:600px) {
+
+            body {
+                padding: 25px 15px;
+            }
+
+            .header h1 {
+                font-size: 28px;
+            }
+
+            .history-card {
+                padding: 18px;
+            }
+
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="header">
+
+            <h1>📚 Interview History</h1>
+
+            <p>
+                Review your previous AI interview performances.
+            </p>
+
+        </div>
+
+
+        <div class="history-card">
+
+            {% if interviews %}
+
+            {% for interview in interviews %}
+
+            <div class="interview">
+
+                <h2>
+                    💼 {{ interview["role"] }}
+                </h2>
+
+                <div class="info">
+
+                    Interview #{{ loop.index }}
+
+                </div>
+
+                <div class="score">
+
+                    📊 Score:
+                    {{ interview["score"] }}/100
+
+                </div>
+
+                <div class="feedback">
+
+                    {{ interview["feedback"] }}
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+            {% else %}
+
+            <div class="empty">
+
+                <div style="font-size:50px;">
+                    📭
+                </div>
+
+                <br>
+
+                No interviews found yet.
+
+                <br><br>
+
+                Complete an AI interview to see it here.
+
+            </div>
+
+            {% endif %}
+
+
+            <div class="buttons">
+
+                <a href="{{ url_for('dashboard') }}" class="btn">
+                    ← Back to Dashboard
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

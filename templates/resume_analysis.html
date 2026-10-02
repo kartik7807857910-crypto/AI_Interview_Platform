@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Resume Analyzer | AI Interview</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+
+            min-height: 100vh;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #0f172a,
+                    #1e293b,
+                    #312e81
+                );
+
+            color: white;
+
+            padding: 30px 20px;
+        }
+
+        .container {
+
+            width: 100%;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        /* HEADER */
+
+        .header {
+
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .header .icon {
+
+            font-size: 55px;
+            margin-bottom: 10px;
+        }
+
+        .header h1 {
+
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+
+            color: #cbd5e1;
+            font-size: 16px;
+        }
+
+
+        /* MAIN CARD */
+
+        .card {
+
+            background:
+                rgba(255, 255, 255, 0.08);
+
+            border:
+                1px solid rgba(255, 255, 255, 0.15);
+
+            border-radius: 22px;
+
+            padding: 35px;
+
+            backdrop-filter: blur(15px);
+
+            box-shadow:
+                0 20px 50px rgba(0, 0, 0, 0.25);
+        }
+
+
+        /* UPLOAD AREA */
+
+        .upload-area {
+
+            border:
+                2px dashed rgba(255, 255, 255, 0.25);
+
+            border-radius: 18px;
+
+            padding: 45px 25px;
+
+            text-align: center;
+
+            background:
+                rgba(0, 0, 0, 0.15);
+
+            transition: 0.3s;
+        }
+
+        .upload-area:hover {
+
+            border-color: #818cf8;
+
+            background:
+                rgba(99, 102, 241, 0.08);
+        }
+
+        .upload-icon {
+
+            font-size: 60px;
+            margin-bottom: 15px;
+        }
+
+        .upload-area h2 {
+
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .upload-area p {
+
+            color: #cbd5e1;
+            margin-bottom: 25px;
+        }
+
+
+        /* FILE INPUT */
+
+        .file-input {
+
+            display: none;
+        }
+
+        .file-label {
+
+            display: inline-block;
+
+            padding: 13px 25px;
+
+            border-radius: 10px;
+
+            background: #6366f1;
+
+            color: white;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .file-label:hover {
+
+            background: #4f46e5;
+
+            transform: translateY(-2px);
+        }
+
+
+        #file-name {
+
+            margin-top: 15px;
+
+            color: #a5b4fc;
+
+            font-size: 14px;
+        }
+
+
+        /* ANALYZE BUTTON */
+
+        .analyze-btn {
+
+            width: 100%;
+
+            margin-top: 25px;
+
+            padding: 15px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #6366f1,
+                    #8b5cf6
+                );
+
+            color: white;
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .analyze-btn:hover {
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 10px 25px rgba(99, 102, 241, 0.3);
+        }
+
+
+        /* INFORMATION */
+
+        .info-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 15px;
+
+            margin-top: 25px;
+        }
+
+        .info-box {
+
+            padding: 18px;
+
+            border-radius: 12px;
+
+            background:
+                rgba(255, 255, 255, 0.05);
+
+            text-align: center;
+        }
+
+        .info-box .emoji {
+
+            font-size: 28px;
+
+            margin-bottom: 8px;
+        }
+
+        .info-box h3 {
+
+            font-size: 15px;
+
+            margin-bottom: 5px;
+        }
+
+        .info-box p {
+
+            color: #94a3b8;
+
+            font-size: 13px;
+        }
+
+
+        /* FLASH MESSAGES */
+
+        .messages {
+
+            margin-bottom: 20px;
+        }
+
+        .message {
+
+            background:
+                rgba(239, 68, 68, 0.15);
+
+            border:
+                1px solid rgba(239, 68, 68, 0.35);
+
+            color: #fecaca;
+
+            padding: 13px 15px;
+
+            border-radius: 10px;
+
+            margin-bottom: 10px;
+
+            text-align: center;
+        }
+
+
+        /* ANALYSIS */
+
+        .analysis-section {
+
+            margin-top: 35px;
+        }
+
+        .analysis-title {
+
+            font-size: 26px;
+
+            margin-bottom: 20px;
+
+            text-align: center;
+        }
+
+        .analysis-card {
+
+            background:
+                rgba(0, 0, 0, 0.20);
+
+            border-radius: 16px;
+
+            padding: 25px;
+
+            border:
+                1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .analysis-content {
+
+            white-space: pre-wrap;
+
+            line-height: 1.8;
+
+            color: #e2e8f0;
+
+            font-size: 15px;
+        }
+
+
+        /* BACK BUTTON */
+
+        .bottom-buttons {
+
+            display: flex;
+
+            justify-content: center;
+
+            margin-top: 30px;
+        }
+
+        .back-btn {
+
+            text-decoration: none;
+
+            padding: 13px 25px;
+
+            border-radius: 10px;
+
+            background:
+                rgba(255, 255, 255, 0.10);
+
+            color: white;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+
+            background:
+                rgba(255, 255, 255, 0.18);
+        }
+
+
+        /* MOBILE */
+
+        @media(max-width: 700px) {
+
+            body {
+                padding: 20px 12px;
+            }
+
+            .header h1 {
+                font-size: 29px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .upload-area {
+                padding: 35px 15px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+        <div class="icon">
+            📄
+        </div>
+
+        <h1>
+            AI Resume Analyzer
+        </h1>
+
+        <p>
+            Upload your resume and get AI-powered
+            feedback to improve your career profile.
+        </p>
+
+    </div>
+
+
+    <!-- MAIN CARD -->
+
+    <div class="card">
+
+
+        <!-- FLASH MESSAGES -->
+
+        {% with messages = get_flashed_messages() %}
+
+            {% if messages %}
+
+                <div class="messages">
+
+                    {% for message in messages %}
+
+                        <div class="message">
+                            {{ message }}
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            {% endif %}
+
+        {% endwith %}
+
+
+        <!-- UPLOAD FORM -->
+
+        <form
+            method="POST"
+            action="{{ url_for('resume_analysis') }}"
+            enctype="multipart/form-data"
+        >
+
+
+            <div class="upload-area">
+
+
+                <div class="upload-icon">
+                    📂
+                </div>
+
+
+                <h2>
+                    Upload Your Resume
+                </h2>
+
+
+                <p>
+                    Upload your resume in PDF or DOCX format.
+                </p>
+
+
+                <label
+                    for="resume"
+                    class="file-label"
+                >
+                    📎 Choose Resume
+                </label>
+
+
+                <input
+                    type="file"
+                    id="resume"
+                    name="resume"
+                    class="file-input"
+                    accept=".pdf,.docx"
+                    required
+                >
+
+
+                <div id="file-name">
+                    No file selected
+                </div>
+
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="analyze-btn"
+            >
+                🤖 Analyze My Resume
+            </button>
+
+
+        </form>
+
+
+        <!-- INFORMATION -->
+
+        <div class="info-grid">
+
+
+            <div class="info-box">
+
+                <div class="emoji">
+                    📊
+                </div>
+
+                <h3>
+                    Resume Score
+                </h3>
+
+                <p>
+                    Get an overall resume score.
+                </p>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <div class="emoji">
+                    💪
+                </div>
+
+                <h3>
+                    Strengths
+                </h3>
+
+                <p>
+                    Discover your strongest areas.
+                </p>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <div class="emoji">
+                    🛠️
+                </div>
+
+                <h3>
+                    Improvements
+                </h3>
+
+                <p>
+                    Get practical suggestions.
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- AI ANALYSIS RESULT -->
+
+        {% if analysis %}
+
+        <div class="analysis-section">
+
+
+            <div class="analysis-title">
+                🤖 AI Resume Analysis
+            </div>
+
+
+            <div class="analysis-card">
+
+                <div class="analysis-content">
+                    {{ analysis }}
+                </div>
+
+            </div>
+
+
+        </div>
+
+        {% endif %}
+
+
+        <!-- BACK BUTTON -->
+
+        <div class="bottom-buttons">
+
+            <a
+                href="{{ url_for('dashboard') }}"
+                class="back-btn"
+            >
+                ← Back to Dashboard
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+<script>
+
+    const fileInput =
+        document.getElementById("resume");
+
+    const fileName =
+        document.getElementById("file-name");
+
+
+    fileInput.addEventListener(
+        "change",
+        function () {
+
+            if (this.files.length > 0) {
+
+                fileName.textContent =
+                    "Selected: " +
+                    this.files[0].name;
+
+            } else {
+
+                fileName.textContent =
+                    "No file selected";
+
+            }
+
+        }
+    );
+
+</script>
+
+
+</body>
+
+</html>

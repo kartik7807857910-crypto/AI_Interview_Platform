@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Practice Question | AI Interview</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+
+            min-height: 100vh;
+
+            background:
+                radial-gradient(circle at top left,
+                    #312e81,
+                    transparent 35%),
+                radial-gradient(circle at bottom right,
+                    #0369a1,
+                    transparent 30%),
+                #020617;
+
+            color: white;
+
+            padding: 30px 20px;
+        }
+
+        .container {
+
+            width: 90%;
+
+            max-width: 900px;
+
+            margin: auto;
+        }
+
+        /* HEADER */
+
+        .header {
+
+            text-align: center;
+
+            margin-bottom: 25px;
+        }
+
+        .header-icon {
+
+            font-size: 50px;
+
+            margin-bottom: 10px;
+        }
+
+        .header h1 {
+
+            font-size: 32px;
+
+            margin-bottom: 8px;
+        }
+
+        .header p {
+
+            color: #94a3b8;
+
+            font-size: 15px;
+        }
+
+        /* PROGRESS */
+
+        .progress-card {
+
+            background:
+                rgba(255, 255, 255, 0.07);
+
+            border:
+                1px solid rgba(255, 255, 255, 0.12);
+
+            border-radius: 16px;
+
+            padding: 18px;
+
+            margin-bottom: 20px;
+
+            backdrop-filter: blur(15px);
+        }
+
+        .progress-info {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            margin-bottom: 10px;
+
+            color: #cbd5e1;
+
+            font-size: 14px;
+        }
+
+        .progress {
+
+            height: 8px;
+
+            background: #1e293b;
+
+            border-radius: 20px;
+
+            overflow: hidden;
+        }
+
+        .progress-bar {
+
+            height: 100%;
+
+            background: #6366f1;
+
+            border-radius: 20px;
+
+            transition: width 0.3s ease;
+        }
+
+        /* QUESTION CARD */
+
+        .card {
+
+            background:
+                rgba(255, 255, 255, 0.08);
+
+            border:
+                1px solid rgba(255, 255, 255, 0.14);
+
+            border-radius: 22px;
+
+            padding: 35px;
+
+            backdrop-filter: blur(15px);
+
+            box-shadow:
+                0 20px 50px rgba(0, 0, 0, 0.25);
+        }
+
+        .category {
+
+            display: inline-block;
+
+            background:
+                rgba(99, 102, 241, 0.2);
+
+            color: #a5b4fc;
+
+            padding: 7px 12px;
+
+            border-radius: 20px;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            margin-bottom: 20px;
+        }
+
+        .question-label {
+
+            color: #94a3b8;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            letter-spacing: 1px;
+
+            margin-bottom: 12px;
+        }
+
+        .question {
+
+            font-size: 27px;
+
+            line-height: 1.5;
+
+            margin-bottom: 25px;
+        }
+
+        /* ANSWER */
+
+        textarea {
+
+            width: 100%;
+
+            min-height: 200px;
+
+            resize: vertical;
+
+            padding: 18px;
+
+            border-radius: 14px;
+
+            border:
+                1px solid rgba(255, 255, 255, 0.15);
+
+            background:
+                rgba(2, 6, 23, 0.65);
+
+            color: white;
+
+            font-size: 16px;
+
+            outline: none;
+        }
+
+        textarea::placeholder {
+
+            color: #64748b;
+        }
+
+        textarea:focus {
+
+            border-color: #6366f1;
+
+            box-shadow:
+                0 0 0 3px rgba(99, 102, 241, 0.15);
+        }
+
+        /* ACTIONS */
+
+        .actions {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            margin-top: 20px;
+        }
+
+        .btn {
+
+            border: none;
+
+            text-decoration: none;
+
+            padding: 13px 22px;
+
+            border-radius: 10px;
+
+            background: #6366f1;
+
+            color: white;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+
+            background: #4f46e5;
+
+            transform: translateY(-2px);
+        }
+
+        .btn.back {
+
+            background: #334155;
+        }
+
+        .btn.back:hover {
+
+            background: #475569;
+        }
+
+        /* TIP */
+
+        .tip {
+
+            margin-top: 20px;
+
+            padding: 16px;
+
+            border-radius: 13px;
+
+            background:
+                rgba(15, 23, 42, 0.7);
+
+            color: #cbd5e1;
+
+            font-size: 14px;
+
+            line-height: 1.6;
+        }
+
+        .tip strong {
+
+            color: white;
+        }
+
+        /* MOBILE */
+
+        @media(max-width: 600px) {
+
+            body {
+
+                padding: 20px 12px;
+            }
+
+            .container {
+
+                width: 94%;
+            }
+
+            .header h1 {
+
+                font-size: 28px;
+            }
+
+            .question {
+
+                font-size: 21px;
+            }
+
+            .card {
+
+                padding: 23px;
+            }
+
+            .actions {
+
+                flex-direction: column;
+            }
+
+            .btn {
+
+                width: 100%;
+
+                text-align: center;
+            }
+
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="container">
+
+
+        <!-- HEADER -->
+
+        <div class="header">
+
+            <div class="header-icon">
+                🧠
+            </div>
+
+            <h1>
+                Practice Session
+            </h1>
+
+            <p>
+                Take your time and answer the question
+                as clearly as possible.
+            </p>
+
+        </div>
+
+
+        <!-- PROGRESS -->
+
+        <div class="progress-card">
+
+            <div class="progress-info">
+
+                <span>
+                    {{ category }}
+                </span>
+
+                <span>
+                    Question {{ question_number }}
+                    of {{ total_questions }}
+                </span>
+
+            </div>
+
+
+            <div class="progress">
+
+                <div class="progress-bar" style="width: {{ (question_number / total_questions) * 100 }}%;"></div>
+
+            </div>
+
+        </div>
+
+
+        <!-- QUESTION CARD -->
+
+        <div class="card">
+
+
+            <div class="category">
+
+                {{ category }}
+
+            </div>
+
+
+            <div class="question-label">
+
+                PRACTICE QUESTION
+
+            </div>
+
+
+            <div class="question">
+
+                {{ question }}
+
+            </div>
+
+
+            <form action="{{ url_for('practice_question') }}" method="POST">
+
+
+                <textarea name="answer" placeholder="Write your answer here..." required></textarea>
+
+
+                <div class="actions">
+
+
+                    <a href="{{ url_for('practice') }}" class="btn back">
+                        ← Categories
+                    </a>
+
+
+                    <button type="submit" class="btn">
+
+                        {% if question_number == total_questions %}
+
+                        Finish Practice ✓
+
+                        {% else %}
+
+                        Next Question →
+
+                        {% endif %}
+
+                    </button>
+
+
+                </div>
+
+
+            </form>
+
+
+            <!-- TIP -->
+
+            <div class="tip">
+
+                <strong>💡 Practice Tip:</strong>
+
+                Try to answer the question yourself
+                before looking for an answer online.
+                This will make your practice more useful.
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+</body>
+
+</html>

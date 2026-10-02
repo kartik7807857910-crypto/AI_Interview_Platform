@@ -1,0 +1,888 @@
+<style>
+
+    /* =====================================================
+       RESET
+    ===================================================== */
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Arial, sans-serif;
+    }
+
+
+    /* =====================================================
+       BODY
+    ===================================================== */
+
+    body {
+
+        min-height: 100vh;
+
+        background:
+            radial-gradient(
+                circle at top left,
+                #263b73 0%,
+                transparent 35%
+            ),
+            radial-gradient(
+                circle at bottom right,
+                #44205f 0%,
+                transparent 35%
+            ),
+            linear-gradient(
+                135deg,
+                #080b18,
+                #10162d 50%,
+                #090c18
+            );
+
+        color: white;
+
+        padding: 30px 20px;
+    }
+
+
+    /* =====================================================
+       MAIN CONTAINER
+    ===================================================== */
+
+    .container {
+
+        width: 100%;
+
+        max-width: 1000px;
+
+        margin: auto;
+    }
+
+
+    /* =====================================================
+       TOP BAR
+    ===================================================== */
+
+    .topbar {
+
+        display: flex;
+
+        justify-content: space-between;
+
+        align-items: center;
+
+        margin-bottom: 30px;
+    }
+
+
+    .brand {
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 10px;
+
+        font-size: 21px;
+
+        font-weight: 800;
+    }
+
+
+    .brand-icon {
+
+        width: 40px;
+
+        height: 40px;
+
+        border-radius: 12px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        background:
+            linear-gradient(
+                135deg,
+                #667eea,
+                #764ba2
+            );
+
+        box-shadow:
+            0 8px 25px
+            rgba(102, 126, 234, 0.30);
+    }
+
+
+    .exit-btn {
+
+        text-decoration: none;
+
+        color: #aab2c8;
+
+        border:
+            1px solid
+            rgba(255, 255, 255, 0.10);
+
+        padding: 9px 15px;
+
+        border-radius: 10px;
+
+        font-size: 13px;
+
+        transition: 0.25s;
+    }
+
+
+    .exit-btn:hover {
+
+        color: white;
+
+        background:
+            rgba(255, 255, 255, 0.06);
+
+        transform: translateY(-1px);
+    }
+
+
+    /* =====================================================
+       HEADER
+    ===================================================== */
+
+    .header {
+
+        text-align: center;
+
+        margin-bottom: 30px;
+    }
+
+
+    .header h1 {
+
+        font-size: 38px;
+
+        margin-bottom: 10px;
+
+        line-height: 1.2;
+    }
+
+
+    .gradient-text {
+
+        background:
+            linear-gradient(
+                90deg,
+                #8ea2ff,
+                #c084fc
+            );
+
+        -webkit-background-clip: text;
+
+        -webkit-text-fill-color: transparent;
+
+        background-clip: text;
+    }
+
+
+    .header p {
+
+        color: #9da6bd;
+
+        font-size: 15px;
+
+        line-height: 1.6;
+    }
+
+
+    /* =====================================================
+       PROGRESS CARD
+    ===================================================== */
+
+    .progress-card {
+
+        background:
+            rgba(255, 255, 255, 0.06);
+
+        border:
+            1px solid
+            rgba(255, 255, 255, 0.10);
+
+        border-radius: 18px;
+
+        padding: 20px 24px;
+
+        backdrop-filter: blur(15px);
+
+        -webkit-backdrop-filter: blur(15px);
+
+        margin-bottom: 25px;
+
+        box-shadow:
+            0 15px 40px
+            rgba(0, 0, 0, 0.15);
+    }
+
+
+    .progress-info {
+
+        display: flex;
+
+        justify-content: space-between;
+
+        align-items: center;
+
+        margin-bottom: 12px;
+
+        font-size: 14px;
+
+        gap: 15px;
+    }
+
+
+    .progress-label {
+
+        color: #cbd2e5;
+
+        font-weight: 600;
+    }
+
+
+    .progress-number {
+
+        color: #9eafff;
+
+        font-weight: 700;
+
+        white-space: nowrap;
+    }
+
+
+    .progress-bar {
+
+        width: 100%;
+
+        height: 8px;
+
+        background:
+            rgba(255, 255, 255, 0.08);
+
+        border-radius: 20px;
+
+        overflow: hidden;
+    }
+
+
+    /* =====================================================
+       FIXED PROGRESS BAR
+    ===================================================== */
+
+    .progress-fill {
+
+        height: 100%;
+
+        width: {{ (question_number / total_questions) * 100 }}%;
+
+        background:
+            linear-gradient(
+                90deg,
+                #667eea,
+                #c084fc
+            );
+
+        border-radius: 20px;
+
+        transition:
+            width 0.4s ease;
+
+        box-shadow:
+            0 0 15px
+            rgba(129, 140, 248, 0.35);
+    }
+
+
+    /* =====================================================
+       INTERVIEW CARD
+    ===================================================== */
+
+    .interview-card {
+
+        background:
+            rgba(255, 255, 255, 0.07);
+
+        border:
+            1px solid
+            rgba(255, 255, 255, 0.12);
+
+        border-radius: 24px;
+
+        padding: 35px;
+
+        backdrop-filter: blur(20px);
+
+        -webkit-backdrop-filter: blur(20px);
+
+        box-shadow:
+            0 25px 70px
+            rgba(0, 0, 0, 0.30);
+    }
+
+
+    /* =====================================================
+       QUESTION HEADER
+    ===================================================== */
+
+    .question-header {
+
+        display: flex;
+
+        justify-content: space-between;
+
+        align-items: center;
+
+        margin-bottom: 25px;
+
+        gap: 15px;
+    }
+
+
+    .question-badge {
+
+        display: inline-flex;
+
+        align-items: center;
+
+        gap: 8px;
+
+        padding: 8px 13px;
+
+        border-radius: 20px;
+
+        background:
+            rgba(102, 126, 234, 0.14);
+
+        border:
+            1px solid
+            rgba(102, 126, 234, 0.25);
+
+        color: #aebaff;
+
+        font-size: 13px;
+
+        font-weight: 700;
+    }
+
+
+    .ai-badge {
+
+        color: #cbd5e1;
+
+        font-size: 13px;
+
+        white-space: nowrap;
+    }
+
+
+    /* =====================================================
+       QUESTION BOX
+    ===================================================== */
+
+    .question-box {
+
+        padding: 28px;
+
+        border-radius: 18px;
+
+        background:
+            rgba(0, 0, 0, 0.18);
+
+        border:
+            1px solid
+            rgba(255, 255, 255, 0.07);
+
+        margin-bottom: 25px;
+    }
+
+
+    .question-box h2 {
+
+        font-size: 26px;
+
+        line-height: 1.5;
+
+        font-weight: 600;
+
+        color: #f5f7ff;
+
+        word-wrap: break-word;
+    }
+
+
+    /* =====================================================
+       ANSWER AREA
+    ===================================================== */
+
+    .answer-label {
+
+        display: flex;
+
+        justify-content: space-between;
+
+        align-items: center;
+
+        margin-bottom: 10px;
+
+        gap: 15px;
+    }
+
+
+    .answer-label span:first-child {
+
+        color: #dce1ef;
+
+        font-size: 14px;
+
+        font-weight: 700;
+    }
+
+
+    .counter {
+
+        color: #737d97;
+
+        font-size: 12px;
+
+        white-space: nowrap;
+    }
+
+
+    textarea {
+
+        display: block;
+
+        width: 100%;
+
+        min-height: 190px;
+
+        resize: vertical;
+
+        padding: 17px;
+
+        border-radius: 14px;
+
+        border:
+            1px solid
+            rgba(255, 255, 255, 0.11);
+
+        background:
+            rgba(0, 0, 0, 0.18);
+
+        color: white;
+
+        outline: none;
+
+        font-size: 15px;
+
+        line-height: 1.6;
+
+        transition:
+            border-color 0.25s,
+            background 0.25s,
+            box-shadow 0.25s;
+    }
+
+
+    textarea::placeholder {
+
+        color: #68718a;
+    }
+
+
+    textarea:focus {
+
+        border-color: #7184ff;
+
+        background:
+            rgba(0, 0, 0, 0.25);
+
+        box-shadow:
+            0 0 0 3px
+            rgba(113, 132, 255, 0.10);
+    }
+
+
+    /* =====================================================
+       BUTTON AREA
+    ===================================================== */
+
+    .button-area {
+
+        display: flex;
+
+        justify-content: flex-end;
+
+        margin-top: 22px;
+    }
+
+
+    .next-btn {
+
+        border: none;
+
+        padding: 14px 25px;
+
+        border-radius: 12px;
+
+        background:
+            linear-gradient(
+                135deg,
+                #667eea,
+                #764ba2
+            );
+
+        color: white;
+
+        font-size: 15px;
+
+        font-weight: 700;
+
+        cursor: pointer;
+
+        transition:
+            transform 0.25s,
+            box-shadow 0.25s,
+            opacity 0.25s;
+
+        box-shadow:
+            0 10px 30px
+            rgba(102, 126, 234, 0.25);
+    }
+
+
+    .next-btn:hover {
+
+        transform: translateY(-2px);
+
+        box-shadow:
+            0 15px 35px
+            rgba(102, 126, 234, 0.38);
+    }
+
+
+    .next-btn:active {
+
+        transform: translateY(0);
+    }
+
+
+    .next-btn:disabled {
+
+        cursor: not-allowed;
+
+        opacity: 0.65;
+
+        transform: none;
+
+        box-shadow:
+            0 5px 15px
+            rgba(102, 126, 234, 0.15);
+    }
+
+
+    /* =====================================================
+       INFO CARDS
+    ===================================================== */
+
+    .info-row {
+
+        display: grid;
+
+        grid-template-columns:
+            repeat(3, 1fr);
+
+        gap: 15px;
+
+        margin-top: 20px;
+    }
+
+
+    .info-card {
+
+        padding: 17px;
+
+        border-radius: 14px;
+
+        background:
+            rgba(255, 255, 255, 0.045);
+
+        border:
+            1px solid
+            rgba(255, 255, 255, 0.07);
+
+        text-align: center;
+
+        transition:
+            transform 0.25s,
+            background 0.25s;
+    }
+
+
+    .info-card:hover {
+
+        transform: translateY(-2px);
+
+        background:
+            rgba(255, 255, 255, 0.07);
+    }
+
+
+    .info-card .icon {
+
+        font-size: 20px;
+
+        margin-bottom: 7px;
+    }
+
+
+    .info-card .label {
+
+        color: #7e879f;
+
+        font-size: 11px;
+
+        text-transform: uppercase;
+
+        letter-spacing: 0.5px;
+
+        margin-bottom: 4px;
+    }
+
+
+    .info-card .value {
+
+        color: #dce2f2;
+
+        font-size: 14px;
+
+        font-weight: 600;
+    }
+
+
+    /* =====================================================
+       TABLET
+    ===================================================== */
+
+    @media (max-width: 700px) {
+
+        body {
+
+            padding: 20px 14px;
+        }
+
+
+        .header h1 {
+
+            font-size: 29px;
+        }
+
+
+        .interview-card {
+
+            padding: 22px;
+        }
+
+
+        .question-box {
+
+            padding: 20px;
+        }
+
+
+        .question-box h2 {
+
+            font-size: 21px;
+        }
+
+
+        .info-row {
+
+            grid-template-columns: 1fr;
+        }
+
+
+        .topbar {
+
+            margin-bottom: 22px;
+        }
+
+
+        .progress-card {
+
+            padding: 18px;
+        }
+
+    }
+
+
+    /* =====================================================
+       MOBILE
+    ===================================================== */
+
+    @media (max-width: 450px) {
+
+        .brand {
+
+            font-size: 18px;
+        }
+
+
+        .brand-icon {
+
+            width: 35px;
+
+            height: 35px;
+        }
+
+
+        .exit-btn {
+
+            padding: 8px 11px;
+
+            font-size: 12px;
+        }
+
+
+        .interview-card {
+
+            padding: 17px;
+        }
+
+
+        .question-header {
+
+            align-items: flex-start;
+
+            gap: 10px;
+
+            flex-direction: column;
+        }
+
+
+        .question-box {
+
+            padding: 18px;
+        }
+
+
+        .question-box h2 {
+
+            font-size: 19px;
+
+            line-height: 1.45;
+        }
+
+
+        .answer-label {
+
+            align-items: flex-start;
+
+            flex-direction: column;
+
+            gap: 5px;
+        }
+
+
+        textarea {
+
+            min-height: 170px;
+
+            font-size: 14px;
+        }
+
+
+        .button-area {
+
+            justify-content: stretch;
+        }
+
+
+        .next-btn {
+
+            width: 100%;
+        }
+
+
+        .progress-info {
+
+            align-items: flex-start;
+
+            flex-direction: column;
+
+            gap: 6px;
+        }
+
+    }
+
+
+    /* =====================================================
+       VERY SMALL PHONES
+    ===================================================== */
+
+    @media (max-width: 360px) {
+
+        body {
+
+            padding: 15px 10px;
+        }
+
+
+        .brand {
+
+            font-size: 16px;
+        }
+
+
+        .brand-icon {
+
+            width: 32px;
+
+            height: 32px;
+
+            border-radius: 9px;
+        }
+
+
+        .exit-btn {
+
+            padding: 7px 9px;
+
+            font-size: 11px;
+        }
+
+
+        .header h1 {
+
+            font-size: 25px;
+        }
+
+
+        .header p {
+
+            font-size: 13px;
+        }
+
+
+        .interview-card {
+
+            padding: 14px;
+        }
+
+
+        .question-box h2 {
+
+            font-size: 18px;
+        }
+
+    }
+
+    </style>

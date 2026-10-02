@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Interview Result | AI Interview</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+
+            min-height: 100vh;
+
+            background:
+                linear-gradient(135deg,
+                    #0f172a,
+                    #1e293b,
+                    #312e81);
+
+            color: white;
+
+            padding: 40px 20px;
+        }
+
+        .container {
+
+            max-width: 1000px;
+
+            margin: auto;
+        }
+
+        .header {
+
+            text-align: center;
+
+            margin-bottom: 30px;
+        }
+
+        .header .icon {
+
+            font-size: 55px;
+
+            margin-bottom: 10px;
+        }
+
+        .header h1 {
+
+            font-size: 36px;
+
+            margin-bottom: 10px;
+        }
+
+        .header p {
+
+            color: #cbd5e1;
+
+            font-size: 17px;
+        }
+
+        .result-card {
+
+            background: rgba(255, 255, 255, 0.08);
+
+            border: 1px solid rgba(255, 255, 255, 0.15);
+
+            border-radius: 22px;
+
+            padding: 35px;
+
+            backdrop-filter: blur(15px);
+
+            box-shadow:
+                0 25px 60px rgba(0, 0, 0, 0.35);
+        }
+
+        .result-card h2 {
+
+            margin-bottom: 20px;
+
+            font-size: 25px;
+        }
+
+        .feedback {
+
+            background: rgba(0, 0, 0, 0.2);
+
+            border-radius: 15px;
+
+            padding: 25px;
+
+            line-height: 1.7;
+
+            white-space: pre-wrap;
+
+            color: #e2e8f0;
+        }
+
+        .buttons {
+
+            display: flex;
+
+            justify-content: center;
+
+            gap: 15px;
+
+            margin-top: 30px;
+
+            flex-wrap: wrap;
+        }
+
+        .btn {
+
+            text-decoration: none;
+
+            padding: 13px 22px;
+
+            border-radius: 10px;
+
+            font-weight: bold;
+
+            color: white;
+
+            background: #6366f1;
+        }
+
+        .btn:hover {
+
+            background: #4f46e5;
+        }
+
+        .btn.secondary {
+
+            background: #475569;
+        }
+
+        .btn.secondary:hover {
+
+            background: #334155;
+        }
+
+        @media(max-width:600px) {
+
+            body {
+                padding: 25px 15px;
+            }
+
+            .result-card {
+                padding: 22px;
+            }
+
+            .header h1 {
+                font-size: 28px;
+            }
+
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="header">
+
+            <div class="icon">
+                🎉
+            </div>
+
+            <h1>
+                Interview Complete!
+            </h1>
+
+            <p>
+                Here is your AI-powered interview evaluation.
+            </p>
+
+        </div>
+
+
+        <div class="result-card">
+
+            <h2>
+                📊 Your Interview Feedback
+            </h2>
+
+            <div class="feedback">
+                {{ feedback }}
+            </div>
+
+
+            <div class="buttons">
+
+                <a href="{{ url_for('create') }}" class="btn">
+                    🔄 Try Another Interview
+                </a>
+
+                <a href="{{ url_for('dashboard') }}" class="btn secondary">
+                    ← Dashboard
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
